@@ -21,6 +21,7 @@
 		AppWindow,
 	} from 'lucide-svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import Separator from '$lib/components/ui/separator/separator.svelte';
 
     const version = '1.0.3';
 </script>
@@ -100,12 +101,26 @@
 						<CardDescription>Ubuntu 20.04+ / Fedora 35+</CardDescription>
 					</CardHeader>
 					<CardContent class="space-y-4">
-						<Button class="w-full" size="lg"  href="https://github.com/outpoot/gurted/releases/download/v{version}/Flumi_Linux.tar.gz" target="_blank" rel="noopener noreferrer">
+						<Button class="w-full" size="lg" href="https://github.com/outpoot/gurted/releases/download/v{version}/Flumi_Linux.tar.gz" target="_blank" rel="noopener noreferrer">
 							<Download class="h-4 w-4 " />
 							Download
 						</Button>
 					</CardContent>
 				</Card>
+				<div class="absolute top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center">
+					<Card class="text-left transition-all duration-300 w-1/3">
+						<CardHeader>
+							<CardTitle class="text-xl">Linux download options</CardTitle>
+						</CardHeader>
+						<CardContent class="space-y-4">
+							<Button class="w-full" size="lg"  href="https://github.com/outpoot/gurted/releases/download/v{version}/Flumi_Linux.tar.gz" target="_blank" rel="noopener noreferrer">
+								<Download class="h-4 w-4 " />
+								Download tar.gz
+							</Button>
+							<Separator />
+						</CardContent>
+					</Card>
+				</div>
 			</div>
 		</div>
 	</section>
