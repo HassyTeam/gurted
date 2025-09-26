@@ -24,6 +24,8 @@
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 
     const version = '1.0.3';
+
+	let popup = false;
 </script>
 
 <svelte:head>
@@ -101,25 +103,47 @@
 						<CardDescription>Ubuntu 20.04+ / Fedora 35+</CardDescription>
 					</CardHeader>
 					<CardContent class="space-y-4">
-						<Button class="w-full" size="lg" href="https://github.com/outpoot/gurted/releases/download/v{version}/Flumi_Linux.tar.gz" target="_blank" rel="noopener noreferrer">
+						<Button class="w-full" size="lg" onclick={() => {popup = true}}>
 							<Download class="h-4 w-4 " />
 							Download
 						</Button>
 					</CardContent>
 				</Card>
-				<div class="absolute top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center">
-					<Card class="text-left transition-all duration-300 w-1/3">
-						<CardHeader>
-							<CardTitle class="text-xl">Linux download options</CardTitle>
-						</CardHeader>
-						<CardContent class="space-y-4">
-							<Button class="w-full" size="lg"  href="https://github.com/outpoot/gurted/releases/download/v{version}/Flumi_Linux.tar.gz" target="_blank" rel="noopener noreferrer">
-								<Download class="h-4 w-4 " />
-								Download tar.gz
-							</Button>
-							<Separator />
-						</CardContent>
-					</Card>
+				<div class={`fixed top-0 left-0 w-screen h-screen bg-black/50 ${popup ? "" : "hidden"}`}>
+					<div class="relative w-screen h-screen flex justify-center items-center">
+						<Card class="text-left transition-all duration-300 lg:w-1/3 md:w-1/2 w-3/4 z-10">
+							<CardHeader>
+								<CardTitle class="text-xl">Linux download options</CardTitle>
+								<CardDescription>Options on whether to download the tar.gz or a native package</CardDescription>
+							</CardHeader>
+							<CardContent class="space-y-2">
+								<p class="font-semibold leading-none">Download the tar.gz:</p>
+								<div class="flex items-center gap-2 sm:flex-row flex-col">
+									<Button class="sm:flex-grow max-sm:w-full" size="lg"  href="https://github.com/outpoot/gurted/releases/download/v{version}/Flumi_Linux.tar.gz" target="_blank" rel="noopener noreferrer">
+										<Download class="h-4 w-4 " />
+										Download tar.gz
+									</Button>
+									<Button class="sm:flex-grow max-sm:w-full" size="lg"  href="https://github.com/outpoot/gurted/releases/tag/v{version}" target="_blank" rel="noopener noreferrer">
+										<Github class="h-4 w-4 " />
+										View on Github
+									</Button>
+								</div>
+								<Separator class="my-4" />
+								<div class="space-y-2 mt-4">
+									<CardTitle class="text-xl">Native packages:</CardTitle>
+									<details class="mx-1 p-4 border-2 rounded-xl">
+										<summary class="font-semibold leading-none">Arch Linux</summary>
+										<div class="space-y-2 ml-4 mt-6">
+											<p class="font-semibold leading-none">Download from AUR:</p>
+											<pre class="bg-muted text-foreground overflow-x-auto rounded-lg p-4 text-sm flex-grow"><code
+												class="language-shell">{`$ yay -S flumi-bin`}</code></pre>
+										</div>
+									</details>
+								</div>
+							</CardContent>
+						</Card>
+						<button aria-label="background" class="absolute top-0 left-0 w-screen h-screen bg-transparent" onclick={() => {popup = false}}></button>
+					</div>
 				</div>
 			</div>
 		</div>
